@@ -21,11 +21,7 @@ module Hydra::ObjectViewer
     end
 
     def present_object(object)
-      presenter = Object.new
-      def presenter.template_name
-        {text: 'Hello World'}
-      end
-      presenter
+      Hydra::ObjectViewer::Presenter.new(object)
     end
   end
 end
