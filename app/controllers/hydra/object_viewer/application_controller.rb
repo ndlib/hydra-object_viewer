@@ -9,12 +9,16 @@ module Hydra::ObjectViewer
     end
 
     def show
-      object = object_instantiator.call(params[:id], cast: true) # The object casting is ActiveFedora specific :(
+      object = instantiate_object(params[:id])
       presenter = present_object(object)
       render presenter.template_name
     end
 
     private
+
+    def instantiate_object(id)
+      object_instantiator.call(id, cast: true) # The object casting is ActiveFedora specific :(
+    end
 
     def present_object(object)
       presenter = Object.new
