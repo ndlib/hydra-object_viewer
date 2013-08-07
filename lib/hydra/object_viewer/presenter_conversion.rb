@@ -1,3 +1,4 @@
+require 'morphine'
 module Hydra::ObjectViewer
   class PresenterConversion
     include Morphine
@@ -20,5 +21,10 @@ module Hydra::ObjectViewer
       object = object_finder.call(findable_id, finder_options)
       presenter_builder.call(object)
     end
+  end
+
+  module_function
+  def PresenterConversion(*args)
+    PresenterConversion.new(*args).call
   end
 end
