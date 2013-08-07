@@ -1,2 +1,2 @@
-HydraObjectViewer::Engine.routes.draw do
+Hydra::ObjectViewer::Engine.routes.draw do
 end

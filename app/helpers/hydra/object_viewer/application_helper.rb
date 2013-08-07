@@ -1,4 +1,4 @@
-module HydraObjectViewer
+module Hydra::ObjectViewer
   module ApplicationHelper
   end
 end

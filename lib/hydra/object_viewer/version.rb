@@ -1,0 +1,3 @@
+module Hydra::ObjectViewer
+  VERSION = "0.0.1"
+end

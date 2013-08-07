@@ -1,4 +1,4 @@
-require "hydra-object_viewer/engine"
+require "hydra/object_viewer/engine"
 
-module HydraObjectViewer
+module Hydra::ObjectViewer
 end
