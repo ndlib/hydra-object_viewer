@@ -16,7 +16,7 @@ module Hydra::ObjectViewer
   describe ApplicationController do
     let(:object_id) { '1234' }
     it 'renders a persisted object' do
-      subject.object_instantiator = lambda{|id, *args| Object.new}
+      subject.object_builder = lambda{|id, *args| Object.new}
       get :show, id: object_id
       expect(response.status).to eq(200)
     end

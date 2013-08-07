@@ -4,11 +4,11 @@ module Hydra::ObjectViewer
   class ApplicationController < ActionController::Base
     include Morphine
 
-    register :object_instantiator do
+    register :object_builder do
       ActiveFedora::Base.method(:find)
     end
 
-    register :presenter_instantiator do
+    register :presenter_builder do
       Hydra::ObjectViewer::Presenter.method(:new)
     end
 
@@ -21,11 +21,11 @@ module Hydra::ObjectViewer
     private
 
     def instantiate_object(id)
-      object_instantiator.call(id, cast: true) # The object casting is ActiveFedora specific :(
+      object_builder.call(id, cast: true) # The object casting is ActiveFedora specific :(
     end
 
     def present_object(object)
-      presenter_instantiator.call(object)
+      presenter_builder.call(object)
     end
   end
 end
