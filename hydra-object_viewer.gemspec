@@ -12,8 +12,9 @@ Gem::Specification.new do |s|
   s.homepage    = "TODO"
   s.summary     = "TODO: Summary of HydraObjectViewer."
   s.description = "TODO: Description of HydraObjectViewer."
+  s.license     = "APACHE2"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 3.2.13"
   s.add_development_dependency "rspec"
