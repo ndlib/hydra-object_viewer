@@ -10,8 +10,7 @@ module Hydra::ObjectViewer
     let(:presenter) { double({template_name: template_name}) }
 
     before(:each) do
-      subject.object_builder = lambda{|id, *args| object}
-      subject.presenter_builder = lambda{|object| presenter}
+      subject.presenter_builder = lambda {|*args| presenter }
     end
 
     describe "presenting a valid template name" do
