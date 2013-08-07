@@ -3,8 +3,8 @@ require 'hydra/object_viewer/converter'
 module Hydra
   module ObjectViewer
     module_function
-    def presenter_for(findable_object_id)
-      converter.call(findable_object_id)
+    def presenter_for(findable_object_id, context)
+      converter.call(findable_object_id, context)
     end
 
     def converter

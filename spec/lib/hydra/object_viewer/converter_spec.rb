@@ -13,11 +13,12 @@ module Hydra::ObjectViewer
 
     subject { Hydra::ObjectViewer::Converter.new }
     let(:found_object) { double }
+    let(:controller) { double }
     before(:each) do
-      subject.object_finder = lambda{|id, *args| found_object }
+      subject.object_finder = lambda{|*| found_object }
     end
     specify {
-      expect(subject.call(findable_object_id)).
+      expect(subject.call(findable_object_id, controller)).
       to be_a_hydra_object_viewer_presenter
     }
   end

@@ -5,7 +5,9 @@ module Hydra::ObjectViewer
     include Morphine
 
     register :presenter_builder do
-      Hydra::ObjectViewer.method(:presenter_for)
+      lambda {|id, controller|
+        Hydra::ObjectViewer.presenter_for(id, controller)
+      }
     end
 
     def show
@@ -13,7 +15,7 @@ module Hydra::ObjectViewer
     end
 
     def presenter
-      @presenter ||= presenter_builder.call(params[:id])
+      @presenter ||= presenter_builder.call(params[:id], self)
     end
     helper_method :presenter
   end
