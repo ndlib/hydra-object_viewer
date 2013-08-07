@@ -8,6 +8,10 @@ module Hydra::ObjectViewer
       ActiveFedora::Base.method(:find)
     end
 
+    register :presenter_instantiator do
+      Hydra::ObjectViewer::Presenter.method(:new)
+    end
+
     def show
       object = instantiate_object(params[:id])
       presenter = present_object(object)
@@ -21,7 +25,7 @@ module Hydra::ObjectViewer
     end
 
     def present_object(object)
-      Hydra::ObjectViewer::Presenter.new(object)
+      presenter_instantiator.call(object)
     end
   end
 end
