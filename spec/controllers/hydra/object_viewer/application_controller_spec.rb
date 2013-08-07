@@ -15,10 +15,13 @@ module Hydra::ObjectViewer
     end
 
     describe "presenting a valid template name" do
-      it 'renders a persisted object' do
+      before(:each) do
         get :show, id: object_id
-        expect(response).to render_template(template_name)
       end
+
+      its(:response) { should render_template(template_name) }
+
+      its(:presenter) { should == presenter }
     end
 
     describe "presenting an invalid template name" do

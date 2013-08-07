@@ -13,10 +13,16 @@ module Hydra::ObjectViewer
     end
 
     def show
-      object = instantiate_object(params[:id])
-      presenter = present_object(object)
       render presenter.template_name
     end
+
+    def presenter
+      @presenter ||= begin
+                       object = instantiate_object(params[:id])
+                       present_object(object)
+                     end
+    end
+    helper_method :presenter
 
     private
 
