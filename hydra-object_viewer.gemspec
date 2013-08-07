@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
 
   s.add_dependency "rails", "~> 3.2.13"
+  s.add_dependency "morphine"
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "bundler", "~> 1.3"
