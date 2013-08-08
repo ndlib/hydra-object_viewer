@@ -5,7 +5,7 @@ describe 'hydra/object_viewer/application/show' do
     options.reverse_merge!(
       description: %(<p id="lorem-id">Lorem Ipsum</p>).html_safe,
       title: %(Hello World),
-      curation_concern: "Collection"
+      classification: "Collection"
     )
     double(options)
   end
@@ -31,7 +31,7 @@ describe 'hydra/object_viewer/application/show' do
       rendered.should have_tag('.object-viewer') do
         with_tag('.primary-content') do
           with_tag('.title', text: primary_content.title)
-          with_tag('.curation-concern', text: primary_content.curation_concern)
+          with_tag('.classification', text: primary_content.classification)
           with_tag('.description p#lorem-id')
         end
 
@@ -47,7 +47,7 @@ describe 'hydra/object_viewer/application/show' do
       rendered.should have_tag('.object-viewer') do
         with_tag('.primary-content') do
           with_tag('.title', text: primary_content.title)
-          with_tag('.curation-concern', text: primary_content.curation_concern)
+          with_tag('.classification', text: primary_content.classification)
           with_tag('.description p#lorem-id')
         end
 
