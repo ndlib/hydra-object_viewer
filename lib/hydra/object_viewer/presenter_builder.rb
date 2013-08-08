@@ -1,5 +1,5 @@
 module Hydra::ObjectViewer
-  class Presenter
+  class PresenterBuilder
     attr_reader :object
 
     def initialize(object)

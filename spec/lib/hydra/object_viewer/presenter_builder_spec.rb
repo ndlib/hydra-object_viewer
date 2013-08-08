@@ -1,11 +1,11 @@
 require 'spec_helper'
-require 'hydra/object_viewer/presenter'
+require 'hydra/object_viewer/presenter_builder'
 
 module Hydra::ObjectViewer
 
-  describe Presenter do
+  describe PresenterBuilder do
     let(:presented_object) { double }
-    subject {Presenter.new(presented_object)}
+    subject {PresenterBuilder.new(presented_object)}
 
     its(:object) { should == presented_object }
 

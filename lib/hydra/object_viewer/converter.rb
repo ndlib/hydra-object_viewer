@@ -12,9 +12,9 @@ module Hydra::ObjectViewer
     end
 
     register :presenter_builder do
-      require 'hydra/object_viewer/presenter'
+      require 'hydra/object_viewer/presenter_builder'
       lambda {|object, controller|
-        Hydra::ObjectViewer::Presenter.new(object)
+        Hydra::ObjectViewer::PresenterBuilder.new(object)
       }
     end
 
