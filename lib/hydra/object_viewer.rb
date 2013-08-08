@@ -1,5 +1,6 @@
 require "hydra/object_viewer/engine"
 require 'hydra/object_viewer/converter'
+require 'hydra/object_viewer/presenter'
 module Hydra
   module ObjectViewer
     module_function

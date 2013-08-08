@@ -1,10 +1,10 @@
 module Hydra::ObjectViewer
   class PresenterBuilder
-    attr_reader :object, :controller
+    attr_reader :object, :context
 
-    def initialize(object, controller)
+    def initialize(object, context)
       @object = object
-      @controller = controller
+      @context = context
     end
 
     def template_name
