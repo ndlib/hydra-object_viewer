@@ -13,7 +13,7 @@ describe Hydra::ObjectViewer do
       subject.stub(:converter).and_return(the_converter)
     end
 
-    specify {
+    it 'should convert an ID and context to a presenter_for' {
       the_converter.should_receive(:call).with(findable_id, context).and_return(the_presenter)
       expect(subject.presenter_for(findable_id, context)).to eq(the_presenter)
     }

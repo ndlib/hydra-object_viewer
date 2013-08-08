@@ -20,7 +20,7 @@ module Hydra::ObjectViewer
 
       its(:response) { should render_template(template_name) }
 
-      its(:presenter) { should == presenter }
+      it { should respond_to(:presenter) }
     end
 
     describe "presenting an invalid template name" do
