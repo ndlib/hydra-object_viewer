@@ -9,6 +9,19 @@ module Hydra::ObjectViewer
     subject {PresenterBuilder.call(presented_object, the_context)}
 
     it { should be_a_kind_of Presenter }
+
+    module Presenters
+      class TestPresenter < Hydra::ObjectViewer::Presenter
+      end
+    end
+
+    it 'finds the presenter by interogating the object' do
+      klass = double(name: 'Test')
+      presented_object.should_receive(:class).and_return(klass)
+
+      expect(subject).to be_kind_of(Hydra::ObjectViewer::Presenters::TestPresenter)
+    end
   end
+
 
 end
