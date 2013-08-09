@@ -1,0 +1,19 @@
+<section class="related">
+  <ol>
+    <% related_contents.each_with_index do |related_content, i| %>
+      <li class='related-content'>
+        <article id="annotated-pid-<%= i %>" class="annotated" itemscope itemtype="http://schema.org/CreativeWork">
+          <link itemprop="isPartOf" href="#<%= presenter.dom_id %>" />
+          <%= render 'header_group', presenter: related_content.subject %>
+          <%= render 'metadata', presenter: related_content.subject %>
+        </article>
+
+        <article class="annotation" itemscope itemtype="http://schema.org/CreativeWork">
+          <link itemprop="about" href="#annotated-pid-<%= i %>" />
+          <%= render 'description', presenter: related_content.annotation %>
+          <%= render 'metadata', presenter: related_content.annotation %>
+        </article>
+      </li>
+    <% end %>
+  </ol>
+</section>

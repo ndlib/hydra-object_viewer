@@ -11,7 +11,7 @@ module Hydra::ObjectViewer
     end
 
     def show
-      render presenter.template_name
+      render 'show'
     end
 
     def presenter

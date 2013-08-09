@@ -1,14 +1,8 @@
 module Hydra::ObjectViewer
-  class PresenterBuilder
-    attr_reader :object, :context
-
-    def initialize(object, context)
-      @object = object
-      @context = context
-    end
-
-    def template_name
-      {text: 'Hello World'}
+  module PresenterBuilder
+    module_function
+    def call(object, context)
+      Hydra::ObjectViewer::Presenter.new(object, context)
     end
   end
 end

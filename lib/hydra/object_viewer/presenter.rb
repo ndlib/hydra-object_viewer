@@ -14,7 +14,7 @@ class Hydra::ObjectViewer::Presenter
   register :presenter_builder do
     require 'hydra/object_viewer/presenter_builder'
     lambda {|object, context|
-      Hydra::ObjectViewer::PresenterBuilder.new(object, context)
+      Hydra::ObjectViewer::PresenterBuilder.call(object, context)
     }
   end
 
@@ -41,6 +41,10 @@ class Hydra::ObjectViewer::Presenter
     )
   rescue NotImplementedError => e
     ""
+  end
+
+  def dom_id
+    context.dom_id(model)
   end
 
   def classification
