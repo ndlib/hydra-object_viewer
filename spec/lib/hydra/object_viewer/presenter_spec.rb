@@ -64,13 +64,31 @@ describe Hydra::ObjectViewer::Presenter do
 
   end
 
-  it "renders itself with the appropriate partial" do
+  it "renders primary_content with the appropriate partial" do
     template = double
     template.should_receive(:render).
-      with(partial: subject.partial_template_name, locals: {presenter: subject}).
+      with(partial: 'primary_content', locals: {presenter: subject}).
       and_return("THE_HTML")
 
-    expect(subject.render(template)).to eq("THE_HTML")
+    expect(subject.render_primary_content(template)).to eq("THE_HTML")
+  end
+
+  describe 'render_related_content' do
+    it 'renders nothing if related_contents are not defined' do
+      template = double
+      expect(subject.render_related_content(template)).to be_empty
+    end
+
+    it 'renders the template if related_contents are present' do
+      def subject.related_contents
+        [1,2,3]
+      end
+      template = double
+      template.should_receive(:render).
+        with(partial: 'related_content', locals: {presenter: subject, related_contents: subject.related_contents}).
+        and_return("THE_HTML")
+      expect(subject.render_related_content(template)).to eq("THE_HTML")
+    end
   end
 
 end

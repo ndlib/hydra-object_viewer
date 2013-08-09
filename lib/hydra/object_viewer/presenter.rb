@@ -5,11 +5,7 @@ class Hydra::ObjectViewer::Presenter
     @model = model
     @context = context
     @container_model_context = container_model_context
-    @partial_template_name = "show"
   end
-
-  attr_reader :partial_template_name
-  private :partial_template_name
 
   delegate :title, :description, to: :model
 
@@ -33,8 +29,18 @@ class Hydra::ObjectViewer::Presenter
     end
   end
 
-  def render(template)
-    template.render(partial: partial_template_name, locals: {presenter: self})
+  def render_primary_content(template)
+    template.render(partial: 'primary_content', locals: {presenter: self})
+  end
+
+  def render_related_content(template)
+    return '' unless related_contents.present?
+    template.render(
+      partial: 'related_content',
+      locals: {presenter: self, related_contents: related_contents}
+    )
+  rescue NotImplementedError => e
+    ""
   end
 
   def classification
