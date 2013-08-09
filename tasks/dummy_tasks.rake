@@ -1,5 +1,10 @@
 namespace :dummy do
-  ENGINE_NAME = Hydra::ObjectViewer.name
+  ENGINE_NAME = 'Hydra::ObjectViewer'
+
+  task :init do
+    DUMMY_ROOT = File.expand_path("../../spec/dummy", __FILE__).freeze
+  end
+
   desc "Generate a Rails dummy for #{ENGINE_NAME} tests"
   task :generate => [:init, :new_app, :scaffold, :install, :migrate, :configure, :cleanup]
 
@@ -7,7 +12,7 @@ namespace :dummy do
   task :remove => :init do
     require 'fileutils'
     $stdout.puts "Removing spec/dummy"
-    DummyFileUtils.rm_rf(DUMMY_ROOT)
+    FileUtils.rm_rf(DUMMY_ROOT)
   end
 
   desc "Replace the existing Rails dummy for #{ENGINE_NAME} tests"
@@ -59,18 +64,16 @@ namespace :dummy do
   end
 
   task :install => [:init, :new_app] do
+    puts "Installing #{ENGINE_NAME}"
+    system("rails generate hydra:object_viewer:install --force")
   end
 
-  task :configure => [:init, :new_app, :install] do
+  task :configure => [:init, :install] do
     initializer_filename = File.join(DUMMY_ROOT, 'config/initializers/hydra_object_viewer_config.rb')
-    File.open(initializer_filename, 'w+') do |f|
+    File.open(initializer_filename, 'w') do |f|
       f.puts <<-EOF
-      Hydra::ObjectViewer.converter.object_finder = lambda {|pid,context|
-        begin
-          Watch.find(pid)
-        rescue ActiveRecord::RecordNotFound
-          Gear.find(pid)
-        end
+      Hydra::ObjectViewer.object_finder { |pid,context|
+        Watch.find(pid)
       }
       EOF
     end
@@ -84,11 +87,6 @@ namespace :dummy do
     puts "Running #{ENGINE_NAME} migrations"
     rakefile = File.join(DUMMY_ROOT, 'Rakefile')
     system("rake -f #{rakefile} db:create db:migrate db:test:prepare")
-  end
-
-  task :init do
-    DummyFileUtils = FileUtils #::DryRun
-    DUMMY_ROOT = File.expand_path("../../spec/dummy", __FILE__).freeze
   end
 
 end

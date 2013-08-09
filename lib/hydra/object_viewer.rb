@@ -8,6 +8,10 @@ module Hydra
       converter.call(findable_object_id, context)
     end
 
+    def object_finder(&finder_proc)
+      converter.object_finder = finder_proc
+    end
+
     def converter
       @converter ||= Converter.new
     end
