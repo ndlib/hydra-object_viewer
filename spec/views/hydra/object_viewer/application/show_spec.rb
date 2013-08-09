@@ -18,8 +18,9 @@ describe 'hydra/object_viewer/application/show' do
         with_tag('.primary-content') do
           with_tag('#RENDERED_PRIMARY_CONTENT')
         end
-
-        with_tag('#RENDERED_RELATED_CONTENT')
+        with_tag('.related') do
+          with_tag('#RENDERED_RELATED_CONTENT')
+        end
       end
     end
   end
