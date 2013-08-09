@@ -1,9 +1,7 @@
 <section id="<%= presenter.dom_id %>" itemscope itemtype="http://schema.org/CollectionPage" class="object-viewer">
 
   <article class="primary-content" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/CreativeWork">
-    <%= render 'header_group', presenter: presenter  %>
-    <%= render 'description', presenter: presenter %>
-    <%= render 'metadata', presenter: presenter %>
+    <%= presenter.render_primary_content(self) %>
   </article>
 
   <%= presenter.render_related_content(self) %>
