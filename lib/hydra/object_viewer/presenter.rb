@@ -30,13 +30,13 @@ class Hydra::ObjectViewer::Presenter
   end
 
   def render_primary_content(template)
-    template.render(partial: 'primary_content', locals: {presenter: self})
+    template.render(partial: primary_content_template_name, locals: {presenter: self})
   end
 
   def render_related_content(template)
     return '' unless related_contents.present?
     template.render(
-      partial: 'related_content',
+      partial: related_content_template_name,
       locals: {presenter: self, related_contents: related_contents}
     )
   rescue NotImplementedError => e
@@ -63,4 +63,12 @@ class Hydra::ObjectViewer::Presenter
       "Define via Class.presents(:related_contents, &block)"
   end
 
+  private
+
+  def primary_content_template_name
+    'primary_content'
+  end
+  def related_content_template_name
+    'related_content'
+  end
 end
