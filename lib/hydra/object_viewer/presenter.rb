@@ -1,5 +1,6 @@
 class Hydra::ObjectViewer::Presenter
   attr_reader :model, :context, :container_model_context
+  private :model, :context, :container_model_context
   def initialize(model, context, container_model_context = nil)
     @model = model
     @context = context
@@ -7,12 +8,6 @@ class Hydra::ObjectViewer::Presenter
   end
 
   delegate :title, :description, to: :model
-
-  def classification
-    model.classification
-  rescue NoMethodError
-    model.class.name.demodulize
-  end
 
   require 'morphine'
   include Morphine
@@ -23,22 +18,31 @@ class Hydra::ObjectViewer::Presenter
     }
   end
 
-  def self.related_contents(method_name)
-    define_method(:related_contents) do
-      send(method_name).collect {|object|
+  def self.presents(presented_method, method_name = nil, &collector)
+    define_method(presented_method) do
+      # Moved this internally as I want to be able to declare presents before
+      # the method is declared
+      function = method_name ? method(method_name) : collector
+      instance_exec(&function).collect {|object|
         presenter_builder.call(object, context)
       }
     end
   end
 
+  def classification
+    model.classification
+  rescue NoMethodError
+    model.class.name.demodulize
+  end
+
   def related_contents
     raise NotImplementedError,
-      "Define via Class.related_contents(:method_name)"
+      "Define via Class.presents(:related_contents, &block)"
   end
 
   def metadata_attributes
     raise NotImplementedError,
-      "Define via Class.metadata_attributes(:method_name)"
+      "Define via Class.presents(:related_contents, &block)"
   end
 
 end

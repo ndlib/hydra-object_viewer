@@ -9,9 +9,6 @@ describe Hydra::ObjectViewer::Presenter do
   let(:the_context) { double }
   subject { Hydra::ObjectViewer::Presenter.new(the_model, the_context) }
 
-  it {should respond_to(:model) }
-  it {should respond_to(:context) }
-  it {should respond_to(:container_model_context) }
   its(:title) { should == the_model.title }
   its(:description) { should == the_model.description }
 
@@ -34,31 +31,37 @@ describe Hydra::ObjectViewer::Presenter do
     end
   end
 
-  describe 'related_contents' do
+  describe '.presents' do
     before(:each) do
+      the_model.stub(:related_contents).and_return(the_related_contents)
       subject.presenter_builder = lambda {|*args|
         Hydra::ObjectViewer::Presenter.new(*args)
       }
     end
     let(:subclass) {
-
       Class.new(Hydra::ObjectViewer::Presenter) {
-        def initialize(related_content_collection, *args)
-          @related_content_collection = related_content_collection
-          super(*args)
-        end
-        attr_reader :related_content_collection
-        related_contents :related_content_collection
+        presents(:related_contents) {
+          model.related_contents
+        }
+        presents(:bacon, :foo)
+        def foo; ['foo method']; end
       }
-
     }
-    let(:related_content) { [model_factory, model_factory] }
-    let(:subject) { subclass.new(related_content, the_model, the_context)}
+    let(:the_related_contents) { [model_factory, model_factory] }
+    let(:subject) { subclass.new(the_model, the_context)}
 
-    it 'is set via a class method which in turn converts that collection to a collection of presenters' do
+    it 'wraps the configured via a proc in a presenter' do
       subject.related_contents.each_with_index do |content, i|
-        expect(content.model).to eq(related_content[i])
+        expect(content.send(:model)).to eq(the_related_contents[i])
       end
     end
+
+    it 'wraps the configured via a symbol in a presenter' do
+      subject.bacon.each_with_index do |content, i|
+        expect(content.send(:model)).to eq(subject.foo.first)
+      end
+    end
+
   end
+
 end
