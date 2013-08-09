@@ -5,7 +5,11 @@ class Hydra::ObjectViewer::Presenter
     @model = model
     @context = context
     @container_model_context = container_model_context
+    @partial_template_name = "show"
   end
+
+  attr_reader :partial_template_name
+  private :partial_template_name
 
   delegate :title, :description, to: :model
 
@@ -27,6 +31,10 @@ class Hydra::ObjectViewer::Presenter
         presenter_builder.call(object, context)
       }
     end
+  end
+
+  def render(template)
+    template.render(partial: partial_template_name, locals: {presenter: self})
   end
 
   def classification

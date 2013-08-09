@@ -64,4 +64,13 @@ describe Hydra::ObjectViewer::Presenter do
 
   end
 
+  it "renders itself with the appropriate partial" do
+    template = double
+    template.should_receive(:render).
+      with(partial: subject.partial_template_name, locals: {presenter: subject}).
+      and_return("THE_HTML")
+
+    expect(subject.render(template)).to eq("THE_HTML")
+  end
+
 end
