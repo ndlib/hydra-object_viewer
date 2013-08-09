@@ -1,3 +1,6 @@
+GEM_ROOT = File.expand_path("../../", __FILE__)
+$:.unshift File.join(GEM_ROOT, "lib")
+
 ENV["RAILS_ENV"] = "test"
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
