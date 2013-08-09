@@ -12,7 +12,16 @@ describe 'Render A Presenter' do
   let(:path_to_object) {
     File.join(engine_mount_point, object.to_param)
   }
-  xit do
+  it do
     visit path_to_object
+    expect(page).to have_tag(".object-viewer#watch_#{object.id}") do
+      with_tag('.primary-content') do
+        with_tag('.title', text: object.title )
+        with_tag('.classification', text: 'Watch' )
+        with_tag('.description')
+      end
+
+      with_tag('.related')
+    end
   end
 end
