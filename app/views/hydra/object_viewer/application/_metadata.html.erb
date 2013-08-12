@@ -1,8 +1,5 @@
 <dl class="metadata">
-  <dt class="creator label">Creator</dt>
-  <dd class="creator value" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <a itemprop="url" href="/show/jeremy-pid"><span itemprop="name">Jeremy Friesen</span></a>
-  </dd>
-  <dt class="created-on label">Created On</dt>
-  <dd class="created-on value"><time itemprop="dateCreated" datetime="2013-08-07">Aug. 7, 2013</time></dd>
+  <%- presenter.metadata_attributes.each do |attribute| -%>
+    <%= attribute.render(self) %>
+  <%- end -%>
 </dl>

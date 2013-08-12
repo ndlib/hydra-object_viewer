@@ -13,6 +13,8 @@ module Hydra::ObjectViewer
     module Presenters
       class TestPresenter < Hydra::ObjectViewer::Presenter
       end
+      class ExplicitlyNamedPresenter < Hydra::ObjectViewer::Presenter
+      end
     end
 
     it 'finds the presenter by interogating the object' do
@@ -20,6 +22,11 @@ module Hydra::ObjectViewer
       presented_object.should_receive(:class).and_return(klass)
 
       expect(subject).to be_kind_of(Hydra::ObjectViewer::Presenters::TestPresenter)
+    end
+
+    it 'finds the presenter by interogating the object' do
+      presented_object.should_receive(:presenter_name).and_return('ExplicitlyNamedPresenter')
+      expect(subject).to be_kind_of(Hydra::ObjectViewer::Presenters::ExplicitlyNamedPresenter)
     end
   end
 
