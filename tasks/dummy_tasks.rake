@@ -57,10 +57,6 @@ namespace :dummy do
   task :scaffold => [:init, :new_app] do
     system("rails generate model Watch title:string description:text")
     system("rails generate model Gear name:string specs:text watch:belongs_to")
-
-
-    # require 'debugger'; debugger; true
-    Rake::Task['dummy:cleanup'].invoke
   end
 
   task :install => [:init, :new_app] do
