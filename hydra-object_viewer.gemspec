@@ -7,11 +7,15 @@ require "hydra/object_viewer/version"
 Gem::Specification.new do |s|
   s.name        = "hydra-object_viewer"
   s.version     = Hydra::ObjectViewer::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Hydra::ObjectViewer."
-  s.description = "TODO: Description of Hydra::ObjectViewer."
+  s.authors     = [
+    "Jeremy Friesen",
+  ]
+  s.email       = [
+    "jeremy.n.friesen@gmail.com"
+  ]
+  s.homepage    = "https://github.com/ndlib/hydra-object_viewer"
+  s.summary     = "The Hydra::ObjectViewer is a mountable Rails engine used for displaying objects."
+  s.description = "The Hydra::ObjectViewer is a mountable Rails engine used for displaying objects."
   s.license     = "APACHE2"
 
   s.files         = `git ls-files`.split($/)
