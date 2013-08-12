@@ -12,7 +12,7 @@ module Hydra::ObjectViewer::Presenters
 end
 
 describe 'Render A Presenter' do
-  let(:object) { Watch.create(title: "My Title", description: "My Description") }
+  let(:object) { Watch.create! {|w| w.title = "My Title"; w.description = "My Description" } }
   let(:engine_mount_point) {
     # This may very well change and could be very fragile. In our use case
     # I am not as concerned.
