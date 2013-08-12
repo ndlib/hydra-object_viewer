@@ -60,7 +60,7 @@ class Hydra::ObjectViewer::Presenter
 
   def metadata_attributes
     raise NotImplementedError,
-      "Define via Class.presents(:related_contents, &block)"
+      "Define via Class.presents(:metadata_attributes, &block)"
   end
 
   private
