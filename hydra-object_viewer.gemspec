@@ -21,12 +21,14 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split($/)
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
 
-  s.add_dependency "rails", "~> 3.2.13"
+  s.required_ruby_version = '>= 1.9.3'
+
+  s.add_dependency "rails", ">= 3.2.14"
   s.add_dependency "morphine"
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "rspec-html-matchers"
-  s.add_development_dependency "bundler", "~> 1.3"
+  s.add_development_dependency "bundler"
   s.add_development_dependency "rake"
   s.add_development_dependency 'guard'
   s.add_development_dependency 'guard-rspec'
